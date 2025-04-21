@@ -31,6 +31,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_executable(cccnake 
     src/main.c
     src/logic.c
+    src/clock.c
 )
 
 target_link_libraries(cccnake PRIVATE raylib)

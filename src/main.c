@@ -1,18 +1,20 @@
 #include <stdio.h>
 #include "raylib.h"
 #include "logic.h"
+#include "clock.h"
 
+#define SCREENWIDTH 600
+#define SCREENHEIGHT 600
+
+#define SNAKESEGSIZE 30
+#define SNAKESPEED 0.3
 int main(void) {
     
-    Snake my_snake = init_snake(Right);
+    // Initialize the game snake
+    Snake snake = init_snake(Right);
+    snake = add_snake_node(snake);
 
-    my_snake = add_snake_node(my_snake);
-    my_snake = add_snake_node(my_snake);
-    my_snake = add_snake_node(my_snake);
-    my_snake.ptr->x = 20;
-    my_snake.ptr->y = 30;
-
-    InitWindow(600, 600, "Minha janela");
+    InitWindow(SCREENWIDTH, SCREENHEIGHT, "CCCnake");
 
     SetTargetFPS(30);
 
@@ -20,20 +22,28 @@ int main(void) {
 
     while (!WindowShouldClose()) {
 
-        for(aux = my_snake.ptr; aux->next != NULL; aux = aux->next) {
-            printf("Meu nodo x: %d, y: %d\n", aux->x, aux->y);
+        // GAME LOGIC AND UPDATES 
+        snake = change_snake_direction(snake);
+        snake = move_snake(snake, SNAKESPEED);
+
+        //SUBSTITUTE THIS BY THE SNAKE EATING THE APPLE
+        if (timer(1)) {
+            add_snake_node(snake);
         }
-        printf("my snake.ptr = %p\n", my_snake.ptr->next);
-
-
-        my_snake = add_snake_node(my_snake);
-        move_snake(my_snake);
-
+        // GAME DRAWING 
         BeginDrawing();
 
         ClearBackground(DARKGRAY);
 
-        DrawRectangle(300, 300, 30, 30, RED);
+        aux = snake.ptr;
+        while (aux != NULL) {
+
+            // THIS WEIRD WAY OF DRAWING WILL REMAIN UNTIL I FIND A NEW WAY OF DOING IT
+            DrawRectangle(SNAKESEGSIZE*(int)aux->x, SNAKESEGSIZE*(int)aux->y, SNAKESEGSIZE, SNAKESEGSIZE, RED);
+            printf("%f %f\n", snake.ptr->x, snake.ptr->y);
+
+            aux = aux->next;
+        }
 
         EndDrawing();
     }

@@ -33,10 +33,6 @@ Snake add_snake_node(Snake snake) {
     return snake;
 }
 
-// PRA DEIXAR ANOTADO, PRA CADA FRAME DO JOGO, O NODO ANTERIOR RECEBE A POSICAO DO NODO DA FRENTE, 
-// DESSA FORMA ELE NAO PRECISA TER UMA DIRECAO PRA ANDAR, SO O PRIMEIRO (teoricamente nem de uma posicao ele preciasaria
-// mas dai ja fica meio feio)
-
 int test_direction(char x_or_y, Going direction) {
     int dir_var = 0;
 
@@ -73,7 +69,7 @@ int test_direction(char x_or_y, Going direction) {
     return dir_var;
 }
 
-void move_snake(Snake snake) {
+Snake move_snake(Snake snake, float snake_speed) {
     
     SnakeNode *aux;
     
@@ -114,14 +110,35 @@ void move_snake(Snake snake) {
 
         }
 
-
-
-
-
-        snake.ptr->x += test_direction('x', snake.direction);
-        snake.ptr->y += test_direction('y', snake.direction);
+        snake.ptr->x += snake_speed*test_direction('x', snake.direction);
+        snake.ptr->y += snake_speed*test_direction('y', snake.direction);
 
     }
 
+    return snake;
+}
+
+Snake change_snake_direction(Snake snake) {
+    Going new_direction = snake.direction;
+
+    if (IsKeyPressed(KEY_LEFT) && snake.direction != Right) {
+        new_direction = Left;
+    }
+
+    if (IsKeyPressed(KEY_RIGHT) && snake.direction != Left) {
+        new_direction = Right;
+    }
+    
+    if (IsKeyPressed(KEY_UP) && snake.direction != Down) {
+        new_direction = Up;
+    }
+
+    if (IsKeyPressed(KEY_DOWN) && snake.direction != Up) {
+        new_direction = Down;
+    }
+
+    snake.direction = new_direction;
+
+    return snake;
     
 }

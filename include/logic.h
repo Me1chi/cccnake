@@ -9,8 +9,8 @@ typedef enum {
 typedef struct SnakeNode SnakeNode;
 
 struct SnakeNode {
-    int x;
-    int y;
+    float x;
+    float y;
 
     SnakeNode *next;
 
@@ -26,4 +26,6 @@ Snake init_snake(Going direction);
 
 Snake add_snake_node(Snake snake);
 
-void move_snake(Snake snake);
+Snake move_snake(Snake snake, float snake_speed);
+
+Snake change_snake_direction(Snake snake);
