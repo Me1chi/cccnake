@@ -7,6 +7,7 @@ Snake init_snake(Going direction) {
     Snake new_snake = {0};
 
     new_snake.direction = direction;
+    new_snake.alive = true;
     new_snake.ptr = NULL;
 
     return new_snake;
@@ -17,9 +18,15 @@ Snake add_snake_node(Snake snake) {
     SnakeNode *aux;
     SnakeNode *snake_tail = (SnakeNode *)malloc(sizeof(SnakeNode));
 
+    // Initializing the tail at (-1, -1). So it does not flash appear on the screen
     snake_tail->next = NULL;
+    snake_tail->x = -1;
+    snake_tail->y = -1;
 
     if (snake.ptr == NULL) {
+        // Changing the the position to (1,1) if it is the 1st node
+        snake_tail->x = 1;
+        snake_tail->y = 1;
         snake.ptr = snake_tail;
     } else {
         aux = snake.ptr;
@@ -69,7 +76,7 @@ int test_direction(char x_or_y, Going direction) {
     return dir_var;
 }
 
-Snake move_snake(Snake snake, float snake_speed) {
+Snake move_snake(Snake snake) {
     
     SnakeNode *aux;
     
@@ -110,8 +117,8 @@ Snake move_snake(Snake snake, float snake_speed) {
 
         }
 
-        snake.ptr->x += snake_speed*test_direction('x', snake.direction);
-        snake.ptr->y += snake_speed*test_direction('y', snake.direction);
+        snake.ptr->x += test_direction('x', snake.direction);
+        snake.ptr->y += test_direction('y', snake.direction);
 
     }
 

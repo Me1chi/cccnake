@@ -16,7 +16,7 @@ int main(void) {
 
     InitWindow(SCREENWIDTH, SCREENHEIGHT, "CCCnake");
 
-    SetTargetFPS(30);
+    SetTargetFPS(10);
 
     SnakeNode *aux;
 
@@ -24,7 +24,7 @@ int main(void) {
 
         // GAME LOGIC AND UPDATES 
         snake = change_snake_direction(snake);
-        snake = move_snake(snake, SNAKESPEED);
+        snake = move_snake(snake);
 
         //SUBSTITUTE THIS BY THE SNAKE EATING THE APPLE
         if (timer(1)) {
@@ -39,8 +39,13 @@ int main(void) {
         while (aux != NULL) {
 
             // THIS WEIRD WAY OF DRAWING WILL REMAIN UNTIL I FIND A NEW WAY OF DOING IT
-            DrawRectangle(SNAKESEGSIZE*(int)aux->x, SNAKESEGSIZE*(int)aux->y, SNAKESEGSIZE, SNAKESEGSIZE, RED);
-            printf("%f %f\n", snake.ptr->x, snake.ptr->y);
+            if (aux == snake.ptr) { 
+                DrawRectangle(SNAKESEGSIZE*aux->x, SNAKESEGSIZE*aux->y, SNAKESEGSIZE, SNAKESEGSIZE, BLUE);    
+            } else {
+                DrawRectangle(SNAKESEGSIZE*aux->x, SNAKESEGSIZE*aux->y, SNAKESEGSIZE, SNAKESEGSIZE, RED);
+            }    
+
+            printf("%d %d\n", snake.ptr->x, snake.ptr->y);
 
             aux = aux->next;
         }

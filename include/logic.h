@@ -9,15 +9,17 @@ typedef enum {
 typedef struct SnakeNode SnakeNode;
 
 struct SnakeNode {
-    float x;
-    float y;
+    int x;
+    int y;
 
     SnakeNode *next;
 
 };
 
 typedef struct {
-    Going direction; 
+    Going direction;
+    _Bool alive;
+
     SnakeNode *ptr;
 
 } Snake;
@@ -26,6 +28,6 @@ Snake init_snake(Going direction);
 
 Snake add_snake_node(Snake snake);
 
-Snake move_snake(Snake snake, float snake_speed);
+Snake move_snake(Snake snake);
 
 Snake change_snake_direction(Snake snake);

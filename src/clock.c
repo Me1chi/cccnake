@@ -1,8 +1,22 @@
 #include "clock.h"
 #include "raylib.h"
-#include <stdio.h>
 
 int timer(int how_many_seconds) {
+    static float timer_accum = 0;
+
+    int tick = 0;
+
+    if (timer_accum >= how_many_seconds) {
+        timer_accum = 0;
+        tick = 1;
+    } else {
+        timer_accum += GetFrameTime();
+    }
+
+    return tick;
+}
+
+int timerf(float how_many_seconds) {
     static float timer_accum = 0;
 
     int tick = 0;
