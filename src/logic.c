@@ -149,3 +149,17 @@ Snake change_snake_direction(Snake snake) {
     return snake;
     
 }
+
+Snake snake_dies(Snake snake) {
+    if (snake.ptr != NULL) {
+        SnakeNode aux = snake.ptr;
+        
+        // AQUI TEM QUE TESTAR SE  O X EH MAIOR QUE O TAMANHO MAXIMO
+        // TEM QUE TESTAR O Y TAMBEM E TESTAR SE OS DOIS SAO MAIORES QUE ZERO 
+        // DAI SE FOREM TEM QUE TESTA SE A COBRA NAO BATEU NELA MESMA, TESTANDO SE 
+        // O NO QUE REPRESENTA A CABECA NAO TA NA MESMA POSICAO DE ALGUM DOS NOS DA 
+        // LISTA, OU SEJA PEGA E PERCORRE A LISTA TODA TESTANDO BEM FACIL....
+        if (aux > )
+
+    }
+}

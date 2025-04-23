@@ -1,3 +1,7 @@
+
+#define SCREENWIDTH 600
+#define SCREENHEIGHT 600
+
 typedef enum {
     Left,
     Right,

@@ -3,9 +3,6 @@
 #include "logic.h"
 #include "clock.h"
 
-#define SCREENWIDTH 600
-#define SCREENHEIGHT 600
-
 #define SNAKESEGSIZE 30
 #define SNAKESPEED 0.3
 int main(void) {
